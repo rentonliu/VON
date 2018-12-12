@@ -13,7 +13,7 @@ class BaseOptions():
 
     def initialize(self, parser):
         parser.add_argument('--dataroot', type=str, default=None, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
-        parser.add_argument('--batch_size', type=int, default=1, help='input batch size')
+        parser.add_argument('--batch_size', type=int, default=12, help='input batch size')
         parser.add_argument('--load_size', type=int, default=128, help='scale images to this size')
         parser.add_argument('--fine_size', type=int, default=128, help='then crop to this size')
         parser.add_argument('--crop_align', action='store_true', help='if the croping is aligned between real and fake')
@@ -34,7 +34,7 @@ class BaseOptions():
 
         parser.add_argument('--dataset_mode', type=str, default='base', help='base')
         parser.add_argument('--model', type=str, default='stage', help='chooses which model to use. bicycle,, ...')
-        parser.add_argument('--num_threads', default=4, type=int, help='# sthreads for loading data')
+        parser.add_argument('--num_threads', default=6, type=int, help='# sthreads for loading data')
         parser.add_argument('--checkpoints_dir', type=str, default='../../results_texture/', help='models are saved here')
 
         parser.add_argument('--serial_batches', action='store_true', help='if true, takes images in order to make batches, otherwise takes them randomly')
@@ -45,13 +45,11 @@ class BaseOptions():
         # models
         parser.add_argument('--num_Ds', type=int, default=2, help='the number of discrminators')
         parser.add_argument('--gan_mode', type=str, default='lsgan', help='dcgan | lsgan | wgangp | hinge')  # for 2D texture network; not for 3D; use gan_mode_3D for 3D shape
-        parser.add_argument('--netD', type=str, default='single', help='selects model to use for netD')
-        parser.add_argument('--netD2', type=str, default='single', help='selects model to use for netD')
+        parser.add_argument('--netD', type=str, default='multi', help='selects model to use for netD')
         parser.add_argument('--netG', type=str, default='resnet_cat', help='selects model to use for netG')
         parser.add_argument('--netE', type=str, default='adaIN', help='selects model to use for netE')
         parser.add_argument('--netG_3D', type=str, default='G0', help='selects model to use for netG_3D')
         parser.add_argument('--netD_3D', type=str, default='D0', help='selects model to use for netD_3D')
-        parser.add_argument('--netM', type=str, default='downsample', help='selects model to use for netM')
         parser.add_argument('--norm', type=str, default='inst', help='instance normalization or batch normalization')
         parser.add_argument('--nl', type=str, default='relu', help='non-linearity activation: relu | lrelu | elu')
         parser.add_argument('--G_norm_3D', type=str, default='batch3d', help='normalization layer for G: inst3d | batch3d | none')
@@ -75,7 +73,7 @@ class BaseOptions():
         parser.add_argument('--epoch', type=str, default='latest', help='which epoch to load? set to latest to use latest cached model')
         parser.add_argument('--phase', type=str, default='val', help='train, val, test, etc')
         parser.add_argument('--use_df', action='store_true', help='use distance function (DF) representation')
-        parser.add_argument('--df_th', type=float, default=0.85, help='threshold for rendering df')
+        parser.add_argument('--df_th', type=float, default=0.90, help='threshold for rendering df')
         parser.add_argument('--seed', type=int, default=0, help='seed')
 
         # special tasks
