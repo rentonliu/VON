@@ -12,7 +12,7 @@ MODEL3D_DIR=${ROOT_DIR}/final_models/models_3D/${CLASS}_${DATASET}
 RESULTS_DIR=${ROOT_DIR}/results/fig_${CLASS}_${DATASET}/
 
 NUM_SHAPES=20   # number of shapes duirng test
-NUM_SAMPLES=8  # number of samples per shape
+NUM_SAMPLES=5  # number of samples per shape
 
 # command
 CUDA_VISIBLE_DEVICES=${GPU_ID} python ./test.py \
@@ -25,9 +25,8 @@ CUDA_VISIBLE_DEVICES=${GPU_ID} python ./test.py \
   --model 'test'  \
   --n_shapes ${NUM_SHAPES} \
   --n_views ${NUM_SAMPLES} \
-  --real_texture \
   --reset_texture \
-  --show_input \
+  --reset_shape \
   --suffix ${CLASS}_${DATASET} \
   --batch_size 1 \
   --use_df \
